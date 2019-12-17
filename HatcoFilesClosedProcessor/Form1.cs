@@ -16,5 +16,26 @@ namespace HatcoFilesClosedProcessor
         {
             InitializeComponent();
         }
+
+        private void OpenMLS_Click(object sender, EventArgs e)
+        {
+            openFileDialogMLS.ShowHelp = true;
+            openFileDialogMLS.ShowDialog();
+            MLSInputFile.Text = openFileDialogMLS.FileName;
+        }
+
+        private async void button1_Click(object sender, EventArgs e)
+        {
+            Processor proc = new Processor();
+
+            try
+            {
+                await Task.Run(() => proc.mainProcessor(MLSInputFile.Text));
+            } catch (Exception ex)
+            {
+                // display any exceptions that are thrown as a popup message box
+                MessageBox.Show(ex.ToString());
+            }
+        }
     }
 }
