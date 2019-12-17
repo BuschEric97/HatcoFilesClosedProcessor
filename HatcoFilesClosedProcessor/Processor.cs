@@ -53,6 +53,11 @@ namespace HatcoFilesClosedProcessor
                     Console.WriteLine("Worksheet 1: " + rangeCount["colCount1MLS"] + "x" + rangeCount["rowCount1MLS"]);
                     Console.WriteLine("Worksheet 2: " + rangeCount["colCount2MLS"] + "x" + rangeCount["rowCount2MLS"]);
                     Console.WriteLine("Worksheet 3: " + rangeCount["colCount3MLS"] + "x" + rangeCount["rowCount3MLS"]);
+
+                    ///TO-DO: Write code to find relevant columns for all 3 worksheets
+
+                    ProcessorWork proc = new ProcessorWork();
+                    proc.processorWork(xlWorksheet1MLS, xlWorksheet2MLS, xlWorksheet3MLS, rangeCount, relevantCols);
                 }
                 catch (Exception ex) // if an exception is caught, close the excel files so they aren't held hostage
                 {
