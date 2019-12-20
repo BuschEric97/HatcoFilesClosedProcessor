@@ -29,6 +29,7 @@ namespace HatcoFilesClosedProcessor
         {
             Processor proc = new Processor();
             var watch = new System.Diagnostics.Stopwatch();
+            progressBar1.Visible = true;
             progressBar1.Maximum = 100;
             progressBar1.Minimum = 0;
             var progress = new Progress<int>(v =>
@@ -39,7 +40,8 @@ namespace HatcoFilesClosedProcessor
             try
             {
                 watch.Start();
-                await Task.Run(() => proc.mainProcessor(MLSInputFile.Text, progress, this));
+                await Task.Run(() => proc.mainProcessor(MLSInputFile.Text,
+                    includeNonMLSAgent.Checked, progress, this));
                 watch.Stop();
                 MessageBox.Show("Complete!\nTime elapsed: " + watch.Elapsed);
             } catch (Exception ex)

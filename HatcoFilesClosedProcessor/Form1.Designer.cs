@@ -36,6 +36,7 @@
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.label2 = new System.Windows.Forms.Label();
             this.progressDetailed = new System.Windows.Forms.Label();
+            this.includeNonMLSAgent = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // MLSInputFile
@@ -73,7 +74,7 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(34, 103);
+            this.button1.Location = new System.Drawing.Point(34, 145);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(690, 96);
             this.button1.TabIndex = 3;
@@ -83,7 +84,7 @@
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(34, 243);
+            this.progressBar1.Location = new System.Drawing.Point(34, 285);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(690, 23);
             this.progressBar1.TabIndex = 4;
@@ -91,7 +92,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(34, 224);
+            this.label2.Location = new System.Drawing.Point(34, 266);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(48, 13);
             this.label2.TabIndex = 5;
@@ -100,17 +101,30 @@
             // progressDetailed
             // 
             this.progressDetailed.AutoSize = true;
-            this.progressDetailed.Location = new System.Drawing.Point(37, 273);
+            this.progressDetailed.Location = new System.Drawing.Point(37, 315);
             this.progressDetailed.Name = "progressDetailed";
             this.progressDetailed.Size = new System.Drawing.Size(24, 13);
             this.progressDetailed.TabIndex = 6;
             this.progressDetailed.Text = "0/0";
             // 
+            // includeNonMLSAgent
+            // 
+            this.includeNonMLSAgent.AutoSize = true;
+            this.includeNonMLSAgent.Checked = true;
+            this.includeNonMLSAgent.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.includeNonMLSAgent.Location = new System.Drawing.Point(34, 101);
+            this.includeNonMLSAgent.Name = "includeNonMLSAgent";
+            this.includeNonMLSAgent.Size = new System.Drawing.Size(140, 17);
+            this.includeNonMLSAgent.TabIndex = 7;
+            this.includeNonMLSAgent.Text = "Include Non-MLS Agent";
+            this.includeNonMLSAgent.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(761, 328);
+            this.ClientSize = new System.Drawing.Size(761, 342);
+            this.Controls.Add(this.includeNonMLSAgent);
             this.Controls.Add(this.progressDetailed);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.progressBar1);
@@ -135,6 +149,7 @@
         public System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Label label2;
         public System.Windows.Forms.Label progressDetailed;
+        private System.Windows.Forms.CheckBox includeNonMLSAgent;
     }
 }
 

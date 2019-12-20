@@ -12,7 +12,8 @@ namespace HatcoFilesClosedProcessor
 {
     class Processor
     {
-        public void mainProcessor(string MLSFileName, IProgress<int> progress, Form1 form)
+        public void mainProcessor(string MLSFileName, bool includeNonMLS,
+            IProgress<int> progress, Form1 form)
         {
             Application.UseWaitCursor = true; // set the cursor to waiting symbol
 
@@ -212,7 +213,7 @@ namespace HatcoFilesClosedProcessor
                     ProcessorWork proc = new ProcessorWork();
                     proc.processorWork(xlWorksheet1MLS, xlWorksheet2MLS, xlWorksheet3MLS,
                         xlRange1MLS, xlRange2MLS, xlRange3MLS, rangeCount, relevantCols,
-                        progress, form);
+                        includeNonMLS, progress, form);
                 }
                 catch (Exception ex) // if an exception is caught, close the excel files so they aren't held hostage
                 {

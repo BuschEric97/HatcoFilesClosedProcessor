@@ -14,8 +14,8 @@ namespace HatcoFilesClosedProcessor
     {
         public void processorWork(Excel._Worksheet xlWorksheet1MLS, Excel._Worksheet xlWorksheet2MLS,
             Excel._Worksheet xlWorksheet3MLS, Excel.Range xlRange1MLS, Excel.Range xlRange2MLS,
-            Excel.Range xlRange3MLS, Dictionary<string, int> rangeCount,
-            Dictionary<string, int> relevantCols, IProgress<int> progress, Form1 form)
+            Excel.Range xlRange3MLS, Dictionary<string, int> rangeCount, Dictionary<string, int> relevantCols,
+            bool includeNonMLS, IProgress<int> progress, Form1 form)
         {
             int sheet2CurrRow = 2;
             int sheet3CurrRow = 2;
@@ -59,211 +59,229 @@ namespace HatcoFilesClosedProcessor
                 if (StringDistance.GetStringDistance(sellingAgent, listingAgent) <= 1 ||
                     sellingAgent == "")
                 {
-                    xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSAgentCol2"]].Value
-                        = sellingAgent;
-                    xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSOfficeCol2"]].Value
-                        = sellingOffice;
-                    xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSOtherAgentCol2"]].Value
-                        = listingAgent;
-                    xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSOtherOfficeCol2"]].Value
-                        = listingOffice;
-                    xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSOwnerCol2"]].Value
-                        = owner;
-                    xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSCityCol2"]].Value
-                        = city;
-                    xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSAddressCol2"]].Value
-                        = address;
-                    xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSCloseDateCol2"]].Value
-                        = closeDate;
-                    xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSPriceCol2"]].Value
-                        = price;
-                    xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSGFCol2"]].Value
-                        = GFNo;
-                    xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSEscrowCol2"]].Value
-                        = escrowOfficer;
-                    xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSAsSACol2"]].Value
-                        = 1;
-                    xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSClosingsCol2"]].Value
-                        = 1;
-                    xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSTCCloseCol2"]].Value
-                        = GFNo != "did not close" ? 1 : 0; // assign 1 if the file closed, 0 otherwise
-                    xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSBSClosingCol2"]].Value
-                        = 1;
-                    xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSBSTCCloseCol2"]].Value
-                        = xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSTCCloseCol2"]].Value; // assign same value as TC Close
+                    if (includeNonMLS || sellingAgent != "Non-MLS Agent")
+                    {
+                        xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSAgentCol2"]].Value
+                            = sellingAgent;
+                        xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSOfficeCol2"]].Value
+                            = sellingOffice;
+                        xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSOtherAgentCol2"]].Value
+                            = listingAgent;
+                        xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSOtherOfficeCol2"]].Value
+                            = listingOffice;
+                        xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSOwnerCol2"]].Value
+                            = owner;
+                        xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSCityCol2"]].Value
+                            = city;
+                        xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSAddressCol2"]].Value
+                            = address;
+                        xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSCloseDateCol2"]].Value
+                            = closeDate;
+                        xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSPriceCol2"]].Value
+                            = price;
+                        xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSGFCol2"]].Value
+                            = GFNo;
+                        xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSEscrowCol2"]].Value
+                            = escrowOfficer;
+                        xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSAsSACol2"]].Value
+                            = 1;
+                        xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSClosingsCol2"]].Value
+                            = 1;
+                        xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSTCCloseCol2"]].Value
+                            = GFNo != "did not close" ? 1 : 0; // assign 1 if the file closed, 0 otherwise
+                        xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSBSClosingCol2"]].Value
+                            = 1;
+                        xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSBSTCCloseCol2"]].Value
+                            = xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSTCCloseCol2"]].Value; // assign same value as TC Close
 
-                    sheet2CurrRow++; // increment so data doesn't get overwritten
+                        sheet2CurrRow++; // increment so data doesn't get overwritten
+                    }
                 }
                 else
                 {
-                    xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSAgentCol2"]].Value
-                        = sellingAgent;
-                    xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSOfficeCol2"]].Value
-                        = sellingOffice;
-                    xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSOtherAgentCol2"]].Value
-                        = listingAgent;
-                    xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSOtherOfficeCol2"]].Value
-                        = listingOffice;
-                    xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSOwnerCol2"]].Value
-                        = owner;
-                    xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSCityCol2"]].Value
-                        = city;
-                    xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSAddressCol2"]].Value
-                        = address;
-                    xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSCloseDateCol2"]].Value
-                        = closeDate;
-                    xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSPriceCol2"]].Value
-                        = price;
-                    xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSGFCol2"]].Value
-                        = GFNo;
-                    xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSEscrowCol2"]].Value
-                        = escrowOfficer;
-                    xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSAsSACol2"]].Value
-                        = 1;
-                    xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSClosingsCol2"]].Value
-                        = 1;
-                    xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSTCCloseCol2"]].Value
-                        = GFNo != "did not close" ? 1 : 0; // assign 1 if the file closed, 0 otherwise
-                    xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSBSClosingCol2"]].Value
-                        = 0;
-                    xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSBSTCCloseCol2"]].Value
-                        = 0;
+                    if (includeNonMLS || sellingAgent != "Non-MLS Agent")
+                    {
+                        xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSAgentCol2"]].Value
+                            = sellingAgent;
+                        xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSOfficeCol2"]].Value
+                            = sellingOffice;
+                        xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSOtherAgentCol2"]].Value
+                            = listingAgent;
+                        xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSOtherOfficeCol2"]].Value
+                            = listingOffice;
+                        xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSOwnerCol2"]].Value
+                            = owner;
+                        xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSCityCol2"]].Value
+                            = city;
+                        xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSAddressCol2"]].Value
+                            = address;
+                        xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSCloseDateCol2"]].Value
+                            = closeDate;
+                        xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSPriceCol2"]].Value
+                            = price;
+                        xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSGFCol2"]].Value
+                            = GFNo;
+                        xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSEscrowCol2"]].Value
+                            = escrowOfficer;
+                        xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSAsSACol2"]].Value
+                            = 1;
+                        xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSClosingsCol2"]].Value
+                            = 1;
+                        xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSTCCloseCol2"]].Value
+                            = GFNo != "did not close" ? 1 : 0; // assign 1 if the file closed, 0 otherwise
+                        xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSBSClosingCol2"]].Value
+                            = 0;
+                        xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSBSTCCloseCol2"]].Value
+                            = 0;
 
-                    sheet2CurrRow++; // increment so data doesn't get overwritten
+                        sheet2CurrRow++; // increment so data doesn't get overwritten
+                    }
 
-                    xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSAgentCol2"]].Value
-                        = listingAgent;
-                    xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSOfficeCol2"]].Value
-                        = listingOffice;
-                    xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSOtherAgentCol2"]].Value
-                        = sellingAgent;
-                    xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSOtherOfficeCol2"]].Value
-                        = sellingOffice;
-                    xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSOwnerCol2"]].Value
-                        = owner;
-                    xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSCityCol2"]].Value
-                        = city;
-                    xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSAddressCol2"]].Value
-                        = address;
-                    xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSCloseDateCol2"]].Value
-                        = closeDate;
-                    xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSPriceCol2"]].Value
-                        = price;
-                    xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSGFCol2"]].Value
-                        = GFNo;
-                    xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSEscrowCol2"]].Value
-                        = escrowOfficer;
-                    xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSAsSACol2"]].Value
-                        = 0;
-                    xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSClosingsCol2"]].Value
-                        = 1;
-                    xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSTCCloseCol2"]].Value
-                        = GFNo != "did not close" ? 1 : 0; // assign 1 if the file closed, 0 otherwise
-                    xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSBSClosingCol2"]].Value
-                        = 0;
-                    xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSBSTCCloseCol2"]].Value
-                        = 0;
+                    if (includeNonMLS || listingAgent != "Non-MLS Agent")
+                    {
+                        xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSAgentCol2"]].Value
+                            = listingAgent;
+                        xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSOfficeCol2"]].Value
+                            = listingOffice;
+                        xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSOtherAgentCol2"]].Value
+                            = sellingAgent;
+                        xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSOtherOfficeCol2"]].Value
+                            = sellingOffice;
+                        xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSOwnerCol2"]].Value
+                            = owner;
+                        xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSCityCol2"]].Value
+                            = city;
+                        xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSAddressCol2"]].Value
+                            = address;
+                        xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSCloseDateCol2"]].Value
+                            = closeDate;
+                        xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSPriceCol2"]].Value
+                            = price;
+                        xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSGFCol2"]].Value
+                            = GFNo;
+                        xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSEscrowCol2"]].Value
+                            = escrowOfficer;
+                        xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSAsSACol2"]].Value
+                            = 0;
+                        xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSClosingsCol2"]].Value
+                            = 1;
+                        xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSTCCloseCol2"]].Value
+                            = GFNo != "did not close" ? 1 : 0; // assign 1 if the file closed, 0 otherwise
+                        xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSBSClosingCol2"]].Value
+                            = 0;
+                        xlRange2MLS.Cells[sheet2CurrRow, relevantCols["MLSBSTCCloseCol2"]].Value
+                            = 0;
 
-                    sheet2CurrRow++; // increment so data doesn't get overwritten
+                        sheet2CurrRow++; // increment so data doesn't get overwritten
+                    }
                 }
 
                 if (StringDistance.GetStringDistance(sellingOffice, listingOffice) <= 1 ||
                     sellingOffice == "")
                 {
-                    xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSAgentCol3"]].Value
-                        = sellingAgent;
-                    xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSOfficeCol3"]].Value
-                        = sellingOffice;
-                    xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSOwnerCol3"]].Value
-                        = owner;
-                    xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSCityCol3"]].Value
-                        = city;
-                    xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSAddressCol3"]].Value
-                        = address;
-                    xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSCloseDateCol3"]].Value
-                        = closeDate;
-                    xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSPriceCol3"]].Value
-                        = price;
-                    xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSGFCol3"]].Value
-                        = GFNo;
-                    xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSEscrowCol3"]].Value
-                        = escrowOfficer;
-                    xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSAsSACol3"]].Value
-                        = 1;
-                    xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSClosingsCol3"]].Value
-                        = 1;
-                    xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSTCCloseCol3"]].Value
-                        = GFNo != "did not close" ? 1 : 0; // assign 1 if the file closed, 0 otherwise
-                    xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSBSClosingCol3"]].Value
-                        = 1;
-                    xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSBSTCCloseCol3"]].Value
-                        = xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSTCCloseCol3"]].Value; // assign same value as TC Close
+                    if (includeNonMLS || sellingAgent != "Non-MLS Agent")
+                    {
+                        xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSAgentCol3"]].Value
+                            = sellingAgent;
+                        xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSOfficeCol3"]].Value
+                            = sellingOffice;
+                        xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSOwnerCol3"]].Value
+                            = owner;
+                        xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSCityCol3"]].Value
+                            = city;
+                        xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSAddressCol3"]].Value
+                            = address;
+                        xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSCloseDateCol3"]].Value
+                            = closeDate;
+                        xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSPriceCol3"]].Value
+                            = price;
+                        xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSGFCol3"]].Value
+                            = GFNo;
+                        xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSEscrowCol3"]].Value
+                            = escrowOfficer;
+                        xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSAsSACol3"]].Value
+                            = 1;
+                        xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSClosingsCol3"]].Value
+                            = 1;
+                        xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSTCCloseCol3"]].Value
+                            = GFNo != "did not close" ? 1 : 0; // assign 1 if the file closed, 0 otherwise
+                        xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSBSClosingCol3"]].Value
+                            = 1;
+                        xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSBSTCCloseCol3"]].Value
+                            = xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSTCCloseCol3"]].Value; // assign same value as TC Close
 
-                    sheet3CurrRow++; // increment so data doesn't get overwritten
+                        sheet3CurrRow++; // increment so data doesn't get overwritten
+                    }
                 }
                 else
                 {
-                    xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSAgentCol3"]].Value
-                        = sellingAgent;
-                    xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSOfficeCol3"]].Value
-                        = sellingOffice;
-                    xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSOwnerCol3"]].Value
-                        = owner;
-                    xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSCityCol3"]].Value
-                        = city;
-                    xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSAddressCol3"]].Value
-                        = address;
-                    xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSCloseDateCol3"]].Value
-                        = closeDate;
-                    xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSPriceCol3"]].Value
-                        = price;
-                    xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSGFCol3"]].Value
-                        = GFNo;
-                    xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSEscrowCol3"]].Value
-                        = escrowOfficer;
-                    xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSAsSACol3"]].Value
-                        = 1;
-                    xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSClosingsCol3"]].Value
-                        = 1;
-                    xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSTCCloseCol3"]].Value
-                        = GFNo != "did not close" ? 1 : 0; // assign 1 if the file closed, 0 otherwise
-                    xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSBSClosingCol3"]].Value
-                        = 0;
-                    xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSBSTCCloseCol3"]].Value
-                        = 0;
+                    if (includeNonMLS || sellingAgent != "Non-MLS Agent")
+                    {
+                        xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSAgentCol3"]].Value
+                            = sellingAgent;
+                        xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSOfficeCol3"]].Value
+                            = sellingOffice;
+                        xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSOwnerCol3"]].Value
+                            = owner;
+                        xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSCityCol3"]].Value
+                            = city;
+                        xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSAddressCol3"]].Value
+                            = address;
+                        xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSCloseDateCol3"]].Value
+                            = closeDate;
+                        xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSPriceCol3"]].Value
+                            = price;
+                        xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSGFCol3"]].Value
+                            = GFNo;
+                        xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSEscrowCol3"]].Value
+                            = escrowOfficer;
+                        xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSAsSACol3"]].Value
+                            = 1;
+                        xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSClosingsCol3"]].Value
+                            = 1;
+                        xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSTCCloseCol3"]].Value
+                            = GFNo != "did not close" ? 1 : 0; // assign 1 if the file closed, 0 otherwise
+                        xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSBSClosingCol3"]].Value
+                            = 0;
+                        xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSBSTCCloseCol3"]].Value
+                            = 0;
 
-                    sheet3CurrRow++; // increment so data doesn't get overwritten
+                        sheet3CurrRow++; // increment so data doesn't get overwritten
+                    }
 
-                    xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSAgentCol3"]].Value
-                        = listingAgent;
-                    xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSOfficeCol3"]].Value
-                        = listingOffice;
-                    xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSOwnerCol3"]].Value
-                        = owner;
-                    xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSCityCol3"]].Value
-                        = city;
-                    xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSAddressCol3"]].Value
-                        = address;
-                    xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSCloseDateCol3"]].Value
-                        = closeDate;
-                    xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSPriceCol3"]].Value
-                        = price;
-                    xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSGFCol3"]].Value
-                        = GFNo;
-                    xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSEscrowCol3"]].Value
-                        = escrowOfficer;
-                    xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSAsSACol3"]].Value
-                        = 0;
-                    xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSClosingsCol3"]].Value
-                        = 1;
-                    xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSTCCloseCol3"]].Value
-                        = GFNo != "did not close" ? 1 : 0; // assign 1 if the file closed, 0 otherwise
-                    xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSBSClosingCol3"]].Value
-                        = 0;
-                    xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSBSTCCloseCol3"]].Value
-                        = 0;
+                    if (includeNonMLS || listingAgent != "Non-MLS Agent")
+                    {
+                        xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSAgentCol3"]].Value
+                            = listingAgent;
+                        xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSOfficeCol3"]].Value
+                            = listingOffice;
+                        xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSOwnerCol3"]].Value
+                            = owner;
+                        xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSCityCol3"]].Value
+                            = city;
+                        xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSAddressCol3"]].Value
+                            = address;
+                        xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSCloseDateCol3"]].Value
+                            = closeDate;
+                        xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSPriceCol3"]].Value
+                            = price;
+                        xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSGFCol3"]].Value
+                            = GFNo;
+                        xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSEscrowCol3"]].Value
+                            = escrowOfficer;
+                        xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSAsSACol3"]].Value
+                            = 0;
+                        xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSClosingsCol3"]].Value
+                            = 1;
+                        xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSTCCloseCol3"]].Value
+                            = GFNo != "did not close" ? 1 : 0; // assign 1 if the file closed, 0 otherwise
+                        xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSBSClosingCol3"]].Value
+                            = 0;
+                        xlRange3MLS.Cells[sheet3CurrRow, relevantCols["MLSBSTCCloseCol3"]].Value
+                            = 0;
 
-                    sheet3CurrRow++; // increment so data doesn't get overwritten
+                        sheet3CurrRow++; // increment so data doesn't get overwritten
+                    }
                 }
 
                 //if (progress != null)
@@ -272,7 +290,9 @@ namespace HatcoFilesClosedProcessor
                 string progressDetailedString = sheet1CurrRow + "/" + (rangeCount["rowCount1MLS"]-1);
                 MethodInvoker inv = delegate
                 {
+                    form.progressBar1.Visible = true;
                     form.progressBar1.Increment(100 / rangeCount["rowCount1MLS"]);
+                    form.progressBar1.Refresh();
                     form.progressDetailed.Text = progressDetailedString;
                 };
                 form.Invoke(inv);
