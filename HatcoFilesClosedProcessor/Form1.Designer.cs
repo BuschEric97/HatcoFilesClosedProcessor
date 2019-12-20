@@ -33,6 +33,9 @@
             this.openFileDialogMLS = new System.Windows.Forms.OpenFileDialog();
             this.OpenMLS = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.label2 = new System.Windows.Forms.Label();
+            this.progressDetailed = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // MLSInputFile
@@ -78,11 +81,39 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(34, 243);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(690, 23);
+            this.progressBar1.TabIndex = 4;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(34, 224);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(48, 13);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "Progress";
+            // 
+            // progressDetailed
+            // 
+            this.progressDetailed.AutoSize = true;
+            this.progressDetailed.Location = new System.Drawing.Point(37, 273);
+            this.progressDetailed.Name = "progressDetailed";
+            this.progressDetailed.Size = new System.Drawing.Size(24, 13);
+            this.progressDetailed.TabIndex = 6;
+            this.progressDetailed.Text = "0/0";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(761, 234);
+            this.ClientSize = new System.Drawing.Size(761, 328);
+            this.Controls.Add(this.progressDetailed);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.OpenMLS);
             this.Controls.Add(this.label1);
@@ -101,6 +132,9 @@
         private System.Windows.Forms.OpenFileDialog openFileDialogMLS;
         private System.Windows.Forms.Button OpenMLS;
         private System.Windows.Forms.Button button1;
+        public System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Label label2;
+        public System.Windows.Forms.Label progressDetailed;
     }
 }
 
